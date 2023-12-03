@@ -1,6 +1,7 @@
 package service
 
 type State struct {
+	gatewayHost			string
 	gatewayPort         string
 	onGatewayPortChange []func(string) error
 
@@ -10,12 +11,22 @@ type State struct {
 
 func NewState() *State {
 	return &State{
+		gatewayHost:		 "",
 		gatewayPort:         "",
 		onGatewayPortChange: make([]func(string) error, 0),
 
 		runtimePath: "",
 		wwwPath:     "",
 	}
+}
+
+func (c *State) SetGatewayHost(host string) error {
+	c.gatewayHost = host
+	return nil
+}
+
+func (c *State) GetGatewayHost() string {
+	return c.gatewayHost
 }
 
 func (c *State) SetGatewayPort(port string) error {

@@ -2,4 +2,5 @@
 runtimepath=/var/run/casaos
 
 [gateway]
+host=
 port=

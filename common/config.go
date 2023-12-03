@@ -14,6 +14,7 @@ const (
 	ConfigKeyLogPath     = "gateway.LogPath"
 	ConfigKeyLogSaveName = "gateway.LogSaveName"
 	ConfigKeyLogFileExt  = "gateway.LogFileExt"
+	ConfigKeyGatewayHost = "gateway.Host"
 	ConfigKeyGatewayPort = "gateway.Port"
 	ConfigKeyRuntimePath = "common.RuntimePath"
 

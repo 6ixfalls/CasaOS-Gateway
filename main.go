@@ -96,6 +96,12 @@ func init() {
 		panic(err)
 	}
 
+	gatewayHost := config.GetString(common.ConfigKeyGatewayHost)
+	if err := _state.SetGatewayHost(gatewayHost); err != nil {
+		logger.Error("Failed to set gateway host", zap.Any("error", err), zap.Any(common.ConfigKeyGatewayHost, gatewayHost))
+		panic(err)
+	}
+
 	gatewayPort := config.GetString(common.ConfigKeyGatewayPort)
 	if err := _state.SetGatewayPort(gatewayPort); err != nil {
 		logger.Error("Failed to set gateway port", zap.Any("error", err), zap.Any(common.ConfigKeyGatewayPort, gatewayPort))
@@ -251,7 +257,7 @@ func run(
 					for _, p := range portsToCheck {
 						port = fmt.Sprintf("%d", p)
 						logger.Info("Checking if port is available...", zap.Any("port", port))
-						if listener, err := net.Listen("tcp", net.JoinHostPort("", port)); err == nil {
+						if listener, err := net.Listen("tcp", net.JoinHostPort(_state.GetGatewayHost(), port)); err == nil {
 							if err = listener.Close(); err != nil {
 								logger.Error("Failed to close listener", zap.Any("error", err), zap.Any("port", port))
 								continue
