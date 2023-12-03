@@ -327,7 +327,7 @@ func run(
 }
 
 func reloadGateway(port string, route *http.ServeMux) error {
-	listener, err := net.Listen("tcp", net.JoinHostPort("", port))
+	listener, err := net.Listen("tcp", net.JoinHostPort(_state.GetGatewayHost(), port))
 	if err != nil {
 		return err
 	}
